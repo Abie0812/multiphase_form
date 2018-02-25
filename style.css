@@ -1,0 +1,13 @@
+body {
+    position: relative;
+    font-family: "Verdana";
+}
+
+div.panel {
+	width: 600px;
+	margin: 60px auto;
+}
+
+form#multiphase > #phase2, #phase3, #show_all_data {
+	display: none;
+}

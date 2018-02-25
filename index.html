@@ -7,77 +7,10 @@
 <head>
 	<meta charset="utf-8">
 	<title>Registration</title>
-	<style>
-		body {
-		    position: relative;
-		    font-family: "Verdana";
-		}
-
-		div.panel {
-			width: 600px;
-			margin: 60px auto;
-		}
-
-		form#multiphase > #phase2, #phase3, #show_all_data {
-			display: none;
-		}
-	</style>
+	<link rel="stylesheet" href="style.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
-	<script>
-		var fname, lname, gender, country;
-		
-		function _(x) {
-			return document.getElementById(x);
-		}
-
-		function processPhase1() {
-			fname = _("firstname").value;
-			lname = _("lastname").value;
-			if(fname.length > 2 && lname.length > 2) {
-				_("phase1").style.display = "none";
-				_("phase2").style.display = "block";
-				_("progressBar").value = 33;
-				_("status").innerHTML = "Phase 2 of 3";
-			} else {
-				alert("Please fill in the fields");
-			}
-		}
-
-		function processPhase2() {
-			gender = _("gender").value;
-			if(gender.length > 0) {
-				_("phase2").style.display = "none";
-				_("phase3").style.display = "block";
-				_("progressBar").value = 66;
-				_("status").innerHTML = "Phase 3 of 3";
-			} else {
-				alert("Please choose your gender");
-			}
-		}
-
-		function processPhase3() {
-			country = _("country").value;
-			if(country.length > 0) {
-				_("phase3").style.display = "none";
-				_("show_all_data").style.display = "block";
-				_("display_fname").innerHTML = fname;
-				_("display_lname").innerHTML = lname;
-				_("display_gender").innerHTML = gender;
-				_("display_country").innerHTML = country;
-				_("progressBar").value = 100;
-				_("status").innerHTML = "Data Overview";
-			} else {
-				alert("Please choose your country");
-			}
-		}
-
-		function submitForm() {
-			_("multiphase").method = "post";
-			_("multiphase").action = "#";
-			_("multiphase").submit();
-		}
-	</script>
+	<script type="text/javascript" src="phase.js"></script>
 </head>
 <body>
 	<div class="panel panel-primary">
