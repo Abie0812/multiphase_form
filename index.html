@@ -1,0 +1,155 @@
+<!-- 
+@author Abie
+@description Multiphase Form use JS, CSS, BootStrap
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Registration</title>
+	<style>
+		body {
+		    position: relative;
+		    font-family: "Verdana";
+		}
+
+		div.panel {
+			width: 600px;
+			margin: 60px auto;
+		}
+
+		form#multiphase > #phase2, #phase3, #show_all_data {
+			display: none;
+		}
+	</style>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+	<script>
+		var fname, lname, gender, country;
+		
+		function _(x) {
+			return document.getElementById(x);
+		}
+
+		function processPhase1() {
+			fname = _("firstname").value;
+			lname = _("lastname").value;
+			if(fname.length > 2 && lname.length > 2) {
+				_("phase1").style.display = "none";
+				_("phase2").style.display = "block";
+				_("progressBar").value = 33;
+				_("status").innerHTML = "Phase 2 of 3";
+			} else {
+				alert("Please fill in the fields");
+			}
+		}
+
+		function processPhase2() {
+			gender = _("gender").value;
+			if(gender.length > 0) {
+				_("phase2").style.display = "none";
+				_("phase3").style.display = "block";
+				_("progressBar").value = 66;
+				_("status").innerHTML = "Phase 3 of 3";
+			} else {
+				alert("Please choose your gender");
+			}
+		}
+
+		function processPhase3() {
+			country = _("country").value;
+			if(country.length > 0) {
+				_("phase3").style.display = "none";
+				_("show_all_data").style.display = "block";
+				_("display_fname").innerHTML = fname;
+				_("display_lname").innerHTML = lname;
+				_("display_gender").innerHTML = gender;
+				_("display_country").innerHTML = country;
+				_("progressBar").value = 100;
+				_("status").innerHTML = "Data Overview";
+			} else {
+				alert("Please choose your country");
+			}
+		}
+
+		function submitForm() {
+			_("multiphase").method = "post";
+			_("multiphase").action = "#";
+			_("multiphase").submit();
+		}
+	</script>
+</head>
+<body>
+	<div class="panel panel-primary">
+		<div class="panel-heading">
+	    	<h3 class="panel-title text-center">Registration Form</h3>
+	  	</div>
+	  	<div class="panel-body">
+	  		<progress id="progressBar" value="0" max="100" style="width: 100%;"></progress>
+	  		<h3 id="status" class="text-center">Phase 1 of 3</h3>
+	  		<form id="multiphase" onsubmit="return false">
+	  			<div id="phase1">
+	  				<div class="input-group">
+	  				  <span class="input-group-addon">First Name</span>
+	  				  <input type="text" class="form-control" placeholder="first name" aria-describedby="firstname"  id="firstname" name="firstname">
+	  				</div><br>
+	  				<div class="input-group">
+	  				  <span class="input-group-addon">Last Name</span>
+	  				  <input type="text" class="form-control" placeholder="last name" aria-describedby="lastname"  id="lastname" name="lastname">
+	  				</div><br>
+	  				<div class="btn-group btn-group-justified" role="group">
+	  				  	<div class="btn-group" role="group">
+	  				    	<button onclick="processPhase1()" class="btn btn-success">Continue</button>
+	  				  	</div>
+	  				</div>
+	  			</div>
+	  			<div id="phase2">
+	  				<div class="input-group">
+	  				  <span class="input-group-addon">Gender</span>
+	  				  	<select id="gender" name="gender" class="form-control">
+		  					<option value="">None</option>	
+		  					<option value="male">Male</option>	
+	  						<option value="female">Female</option>	
+	  				  	</select>
+	  				</div><br>
+	  				<div class="btn-group btn-group-justified" role="group">
+	  				  	<div class="btn-group" role="group">
+	  				    	<button onclick="processPhase2()" class="btn btn-success">Continue</button>
+	  				  	</div>
+	  				</div>
+	  			</div>
+	  			<div id="phase3">
+	  				<div class="input-group">
+	  				  <span class="input-group-addon">Country</span>
+	  				  	<select id="country" name="country" class="form-control">
+	  				  		<option value="United States">United States</option>
+	  				  		<option value="Indonesia">Indonesia</option>
+	  				  		<option value="United Kingdom">United Kingdom</option>
+	  				  	</select>
+	  				</div><br>
+	  				<div class="btn-group btn-group-justified" role="group">
+	  				  	<div class="btn-group" role="group">
+	  				    	<button onclick="processPhase3()" class="btn btn-success">Continue</button>
+	  				  	</div>
+	  				</div>
+	  			</div>
+	  			<div id="show_all_data">
+	  				<div class="alert alert-info text-center">
+		  				<h4>First Name : <span id="display_fname"></span></h4><br>
+		  				<h4>Last Name  : <span id="display_lname"></span></h4><br>
+		  				<h4>Gender     : <span id="display_gender"></span></h4><br>
+		  				<h4>Country    : <span id="display_country"></span></h4><br>
+	  				</div>
+	  				<div class="btn-group btn-group-justified" role="group">
+	  				  	<div class="btn-group" role="group">
+	  				    	<button onclick="submitForm()" class="btn btn-warning">Submit Data</button>
+	  				  	</div>
+	  				</div>	
+	  			</div>
+	  		</form>
+	  	</div>
+	</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>
